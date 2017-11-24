@@ -15,7 +15,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>30</version>
+        <version>32</version>
         <relativePath />
     </parent>
 
@@ -38,14 +38,41 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
+                    <skip>true</skip>
                     <instructions>
                         <Export-Package>
-                            javax.json.*;-split-package:=first
+                            javax.json;-split-package:=first,
+                            javax.json.stream;-split-package:=merge-first,
+                            javax.json.spi;-split-package:=first
                         </Export-Package>
                         <Private-Package>org.apache.johnzon.core</Private-Package>
                         <Import-Package />
+                        <_noee>true</_noee>
                     </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <forceCreation>true</forceCreation>
+                    <archive>
+                        <manifestFile>
+                            ${project.build.outputDirectory}/META-INF/MANIFEST.MF
+                        </manifestFile>
+                        <manifestEntries>
+                            <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=1.7))"</Require-Capability>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -64,12 +91,6 @@
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-json_1.1_spec</artifactId>
             <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.johnzon</groupId>
-            <artifactId>johnzon-core</artifactId>
-            <version>1.1.1</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

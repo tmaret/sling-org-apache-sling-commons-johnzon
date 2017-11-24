@@ -22,13 +22,26 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Map;
 
+import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
+import javax.json.JsonMergePatch;
+import javax.json.JsonNumber;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.json.JsonPatch;
+import javax.json.JsonPatchBuilder;
+import javax.json.JsonPointer;
 import javax.json.JsonReader;
 import javax.json.JsonReaderFactory;
+import javax.json.JsonString;
+import javax.json.JsonStructure;
+import javax.json.JsonValue;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 import javax.json.stream.JsonGenerator;
@@ -51,32 +64,100 @@ public abstract class JsonProvider {
 
     public abstract JsonParser createParser(Reader reader);
 
-    public abstract JsonParser createParser(InputStream in);
+    public abstract JsonParser createParser(InputStream var1);
 
-    public abstract JsonParserFactory createParserFactory(Map<String, ?> config);
+    public abstract JsonParserFactory createParserFactory(Map<String, ?> var1);
 
-    public abstract JsonGenerator createGenerator(Writer writer);
+    public abstract JsonGenerator createGenerator(Writer var1);
 
-    public abstract JsonGenerator createGenerator(OutputStream out);
+    public abstract JsonGenerator createGenerator(OutputStream var1);
 
-    public abstract JsonGeneratorFactory createGeneratorFactory(Map<String, ?> config);
+    public abstract JsonGeneratorFactory createGeneratorFactory(Map<String, ?> var1);
 
-    public abstract JsonReader createReader(Reader reader);
+    public abstract JsonReader createReader(Reader var1);
 
-    public abstract JsonReader createReader(InputStream in);
+    public abstract JsonReader createReader(InputStream var1);
 
-    public abstract JsonWriter createWriter(Writer writer);
+    public abstract JsonWriter createWriter(Writer var1);
 
-    public abstract JsonWriter createWriter(OutputStream out);
+    public abstract JsonWriter createWriter(OutputStream var1);
 
-    public abstract JsonWriterFactory createWriterFactory(Map<String, ?> config);
+    public abstract JsonWriterFactory createWriterFactory(Map<String, ?> var1);
 
-    public abstract JsonReaderFactory createReaderFactory(Map<String, ?> config);
+    public abstract JsonReaderFactory createReaderFactory(Map<String, ?> var1);
 
     public abstract JsonObjectBuilder createObjectBuilder();
 
+    public JsonObjectBuilder createObjectBuilder(JsonObject jsonObject) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonObjectBuilder createObjectBuilder(Map<String, Object> map) {
+        throw new UnsupportedOperationException();
+    }
+
     public abstract JsonArrayBuilder createArrayBuilder();
 
-    public abstract JsonBuilderFactory createBuilderFactory(Map<String, ?> config);
+    public JsonArrayBuilder createArrayBuilder(JsonArray initialData) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonArrayBuilder createArrayBuilder(Collection<?> initialData) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonPointer createPointer(String path) {
+        throw new UnsupportedOperationException();
+    }
+
+    public abstract JsonBuilderFactory createBuilderFactory(Map<String, ?> var1);
+
+    public JsonString createValue(String value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonNumber createValue(int value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonNumber createValue(long value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonNumber createValue(double value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonNumber createValue(BigDecimal value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonNumber createValue(BigInteger value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonPatch createPatch(JsonArray array) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonPatch createDiff(JsonStructure source, JsonStructure target) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonPatchBuilder createPatchBuilder() {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonPatchBuilder createPatchBuilder(JsonArray initialData) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonMergePatch createMergePatch(JsonValue patch) {
+        throw new UnsupportedOperationException();
+    }
+
+    public JsonMergePatch createMergeDiff(JsonValue source, JsonValue target) {
+        throw new UnsupportedOperationException();
+    }
 }
 
